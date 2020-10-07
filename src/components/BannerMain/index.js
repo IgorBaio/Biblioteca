@@ -7,22 +7,22 @@ import { Link } from 'react-router-dom';
 export default function BannerMain({
   livro
 }) {
-  const idEmprestado = localStorage.getItem('@biblioteca/livroId');
-  const nomeEmprestado = localStorage.getItem('@biblioteca/livroNome');
+  const idEmprestado = localStorage.getItem('livros');
+  debugger;
+
+  let livrosArray = JSON.parse(idEmprestado) ?? [0] ;
   console.log(idEmprestado)
-  console.log(nomeEmprestado)
-  const handleSubmit = (livroId) => {
-    // const username = e.target.elements.username.value;
-    console.log(livroId)
-    // localStorage.setItem('@biblioteca/username', username);
-    // window.location.reload();
-  }
+
+  function arrayRemove(arr, value) { return arr.filter(function(ele){ return ele != value; });}
+
   const removeBook = () => {
-    let msg = prompt('Deseja mesmo devolver?');
-    if(msg.toLowerCase().includes('sim')){
-      localStorage.removeItem('@biblioteca/livroId');
+    let msg = window.confirm('Deseja mesmo devolver?');
+    if(msg){
+      livrosArray = arrayRemove(livrosArray, livro.id)
+      debugger;
+      localStorage.setItem('livros', JSON.stringify(livrosArray));
+      window.location.reload()
     }
-    window.location.reload()
   }
   return (
     <BannerMainContainer backgroundImage={livro.capa}>
@@ -36,7 +36,7 @@ export default function BannerMain({
             {livro.descricao}
           </ContentAreaContainer.Description>
           <ContentAreaContainer.Item>
-          {idEmprestado == livro.id ? 
+          {livrosArray.includes(livro.id) ? 
            <Button onClick={()=>removeBook()} className="ButtonLink" >Devolver Livro</Button> :
         <Button as={Link} to={{pathname:'/Cadastro',
         state: livro

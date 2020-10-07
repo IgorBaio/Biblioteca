@@ -8,8 +8,6 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 
 function CadastroEmprestimo() {
-  let localStorageEmprestimoID = localStorage.getItem('@biblioteca/livroId');
-  const localStorageEmprestimoNome = localStorage.getItem('@biblioteca/livroNome');
   const valoresIniciais = {
     nome: '',
     descricao: '',
@@ -62,12 +60,13 @@ function CadastroEmprestimo() {
         event.preventDefault();
         setEmprestimos([...emprestimos, values]);
         setValues(valoresIniciais);
-        console.log(livro.id)
-        console.log(location)
-        setLivro({emprestimo:true})
-        console.log(livro)
-        localStorage.setItem("@biblioteca/livroId",livro.id)
-        localStorage.setItem("@biblioteca/livroNome",livro.titulo)
+        let livrosArray = []
+        const livrosEmprestados = localStorage.getItem('livros');
+        if(livrosEmprestados !== null)
+          livrosArray = JSON.parse(livrosEmprestados);
+         
+        livrosArray.push(livro.id)
+        localStorage.setItem("livros",JSON.stringify(livrosArray))
       }}
       >
 
