@@ -1,9 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## About this project
+
+In this project you can see a library with some books and their descriptions.
+
+It has a system of taking a book and returning it.
+
+To run the project locally, just follow the next steps:
 
 ## Available Scripts
-
-In the project directory, you can run:
-
 ### `yarn start`
 
 Runs the app in the development mode.<br />
