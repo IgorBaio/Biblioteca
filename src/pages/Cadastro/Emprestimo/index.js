@@ -9,9 +9,9 @@ function CadastroEmprestimo() {
   const history = useHistory();
   const [livro, setLivro] = useState(location.state);
   const [dateNow, setDateNow] = useState(new Date());
-  
+  debugger;
   const valoresIniciais = {
-      nome: localStorage.getItem('nome') != '' ? localStorage.getItem('nome') : '',
+      nome: localStorage.getItem('nome') !== null ? localStorage.getItem('nome') : '',
       date: `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()}`,
       livroId: '',
     };
