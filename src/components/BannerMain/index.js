@@ -10,7 +10,6 @@ export default function BannerMain({
 }) {
   const history = useHistory();
   const idEmprestado = localStorage.getItem('livros');
-  debugger;
 
   let livrosArray = JSON.parse(idEmprestado) ?? [0] ;
   console.log(idEmprestado)
@@ -21,7 +20,6 @@ export default function BannerMain({
     let msg = window.confirm('Deseja mesmo devolver?');
     if(msg){
       livrosArray = arrayRemove(livrosArray, livro.id)
-      debugger;
       localStorage.setItem('livros', JSON.stringify(livrosArray));
       history.push('/');
     }

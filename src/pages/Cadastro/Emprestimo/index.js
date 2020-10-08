@@ -9,16 +9,15 @@ function CadastroEmprestimo() {
   const history = useHistory();
   const [livro, setLivro] = useState(location.state);
   const [dateNow, setDateNow] = useState(new Date());
-
   
-    const valoresIniciais = {
-      nome: '',
+  const valoresIniciais = {
+      nome: localStorage.getItem('nome') != '' ? localStorage.getItem('nome') : '',
       date: `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()}`,
       livroId: '',
     };
 
   const [values, setValues] = useState(valoresIniciais);
-
+ 
   const setValue = (chave, valor) => {
     setValues({
       ...values,
@@ -33,7 +32,6 @@ function CadastroEmprestimo() {
     );
   }
 
-  
   return (
     <PageDefault>
       <h1>
@@ -43,16 +41,21 @@ function CadastroEmprestimo() {
 
       <form onSubmit={function handleSubmit(event) {
         event.preventDefault();
-        setValues(valoresIniciais);
-        let livrosArray = []
-        const livrosEmprestados = localStorage.getItem('livros');
-        if(livrosEmprestados !== null)
-          livrosArray = JSON.parse(livrosEmprestados);
-         
-        livrosArray.push(livro.id)
-        localStorage.setItem("livros",JSON.stringify(livrosArray))
-        alert(`${livro.titulo} Emprestado`);
-        history.push('/')
+        if(values.nome === ''){
+          alert('O campo "Nome" deve ser preenchido');
+        }else{
+
+          let livrosArray = []
+          const livrosEmprestados = localStorage.getItem('livros');
+          if(livrosEmprestados !== null)
+            livrosArray = JSON.parse(livrosEmprestados);
+           
+          livrosArray.push(livro.id)
+          localStorage.setItem("livros",JSON.stringify(livrosArray))
+          localStorage.setItem("nome",values.nome)
+          alert(`${livro.titulo} Emprestado`);
+          history.push('/')
+        }
       }}
       >
 
