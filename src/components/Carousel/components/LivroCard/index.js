@@ -1,12 +1,12 @@
 import React from 'react';
-import { VideoCardContainer } from './styles';
+import { LivroCardContainer } from './styles';
 import {useLocation } from "react-router-dom";
 
 
-function VideoCard({ videoTitle,videoCapa, videoURL, categoryColor, livroId }) {
+function LivroCard({ videoTitle,videoCapa, videoURL, categoryColor, livroId }) {
   let location = useLocation();
   return (
-    <VideoCardContainer
+    <LivroCardContainer
       id={livroId}
       url={videoCapa}
       href={location.pathname}
@@ -18,4 +18,4 @@ function VideoCard({ videoTitle,videoCapa, videoURL, categoryColor, livroId }) {
   );
 }
 
-export default VideoCard;
+export default LivroCard;

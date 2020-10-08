@@ -1,20 +1,20 @@
 import React from 'react';
-import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
-import VideoCard from './components/VideoCard';
+import { LivroCardGroupContainer, Title, ExtraLink } from './styles';
+import LivroCard from './components/LivroCard';
 import Slider, { SliderItem } from './components/Slider';
 import { Link } from "react-router-dom";
 function Carrousel({
-  ignoreFirstVideo,
+  ignoreFirstLivro,
   category,
 }) {
   const livros = category;
   
   return (
-    <VideoCardGroupContainer>
+    <LivroCardGroupContainer>
       
       <Slider>
         {livros.map((video, index) => {
-          if (ignoreFirstVideo && index === 0) {
+          if (ignoreFirstLivro && index === 0) {
             return null;
           }
 
@@ -25,7 +25,7 @@ function Carrousel({
                                 state: video
                               }
                             } >
-                <VideoCard
+                <LivroCard
                   videoTitle={video.titulo}
                   videoCapa={video.capa}
                   videoURL={'/BookDetails'}
@@ -37,7 +37,7 @@ function Carrousel({
           );
         })}
       </Slider>
-    </VideoCardGroupContainer>
+    </LivroCardGroupContainer>
   );
 }
 

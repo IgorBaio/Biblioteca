@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const VideoContainer = styled.div`
+export const LivroContainer = styled.div`
   position: relative;
   overflow: hidden;
   max-height:50%;

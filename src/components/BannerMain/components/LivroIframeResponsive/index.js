@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { VideoContainer } from './styles';
+import { LivroContainer } from './styles';
 
 function YouTubeIframeResponsive({ Capa }) {
   return (
-    <VideoContainer>
-        <img src={Capa} alt="Logo"  width="80%" height="30%"/>;
+    <LivroContainer>
+        <img src={Capa} alt="Capa"  width="80%" height="30%"/>;
       
-    </VideoContainer>
+    </LivroContainer>
   );
 }
 
