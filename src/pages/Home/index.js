@@ -17,7 +17,7 @@ function Home() {
       />
 
       <Carousel
-        ignoreFirstVideo
+        ignoreFirstLivro
         category={books}
       />
 

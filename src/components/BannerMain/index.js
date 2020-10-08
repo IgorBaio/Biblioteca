@@ -2,11 +2,13 @@ import React from 'react';
 import LivroIframeResponsive from './components/LivroIframeResponsive';
 import { BannerMainContainer, ContentAreaContainer, WatchButton } from './styles';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 
 export default function BannerMain({
   livro
 }) {
+  const history = useHistory();
   const idEmprestado = localStorage.getItem('livros');
   debugger;
 
@@ -21,7 +23,7 @@ export default function BannerMain({
       livrosArray = arrayRemove(livrosArray, livro.id)
       debugger;
       localStorage.setItem('livros', JSON.stringify(livrosArray));
-      window.location.reload()
+      history.push('/');
     }
   }
   return (
@@ -37,7 +39,7 @@ export default function BannerMain({
           </ContentAreaContainer.Description>
           <ContentAreaContainer.Item>
           {livrosArray.includes(livro.id) ? 
-           <Button onClick={()=>removeBook()} className="ButtonLink" >Devolver Livro</Button> :
+           <Button as={Link} onClick={()=>removeBook()} className="ButtonLink" >Devolver Livro</Button> :
         <Button as={Link} to={{pathname:'/Cadastro',
         state: livro
       }} className="ButtonLink" >Pegar Livro</Button>  
