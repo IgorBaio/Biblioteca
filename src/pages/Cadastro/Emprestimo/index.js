@@ -1,21 +1,22 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable linebreak-style */
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link, useLocation,useHistory } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 
 function CadastroEmprestimo() {
-  const valoresIniciais = {
-    nome: '',
-    descricao: '',
-    cor: '',
-  };
   let location = useLocation();
+  const history = useHistory();
   const [livro, setLivro] = useState(location.state);
-  const [emprestimos, setEmprestimos] = useState([]);
+  const [dateNow, setDateNow] = useState(new Date());
+
+  
+    const valoresIniciais = {
+      nome: '',
+      date: `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()}`,
+      livroId: '',
+    };
+
   const [values, setValues] = useState(valoresIniciais);
 
   const setValue = (chave, valor) => {
@@ -31,24 +32,8 @@ function CadastroEmprestimo() {
       event.target.value,
     );
   }
-{
-  // useEffect(()=>{
-  //   console.log("Alou");
-  //   const URL = window.location.hostname.includes("localhost") ?
-  //   'http://localhost:8080/categorias'
-  //   : "https://devsoutinhoflix.herokuapp.com/categorias";
-  //   fetch(URL)
-  //   .then(async (res) => {
-  //       const respost = await res.json()
-  //       setEmprestimos([
-  //       ...respost,
-  //     ]);
-  //     });
-  //   },[]
 
-  // )
-}
- 
+  
   return (
     <PageDefault>
       <h1>
@@ -58,7 +43,6 @@ function CadastroEmprestimo() {
 
       <form onSubmit={function handleSubmit(event) {
         event.preventDefault();
-        setEmprestimos([...emprestimos, values]);
         setValues(valoresIniciais);
         let livrosArray = []
         const livrosEmprestados = localStorage.getItem('livros');
@@ -67,6 +51,8 @@ function CadastroEmprestimo() {
          
         livrosArray.push(livro.id)
         localStorage.setItem("livros",JSON.stringify(livrosArray))
+        alert(`${livro.titulo} Emprestado`);
+        history.push('/')
       }}
       >
 
@@ -82,19 +68,17 @@ function CadastroEmprestimo() {
         <FormField
           label="Data de empréstimo:"
           inputType="date"
-          type="date"
-          name="descricao"
-          value={values.descricao}
-          onChange={handleChange}
+          type="input"
+          name="Data de empréstimo:"
+          value={values.date}
         />
 
         <FormField
           label="Livro:"
-          inputType="number"
-          type="number"
+          inputType="input"
+          type="text"
           name="livro"
-          value={location.state.id}
-          onChange={handleChange}
+          value={livro.titulo}
         />
         
         
@@ -102,20 +86,8 @@ function CadastroEmprestimo() {
           Cadastrar
         </Button>
 
-        {emprestimos.length === 0 && <div>
-          <br />Loading...
-        </div>}
-
-        <ul>
-          {emprestimos.map((categoria, indice) => (
-            <li key={`${categoria}${indice}`}>{categoria.nome}</li>
-          ))}
-        </ul>
-
       </form>
-      <Link to="/">
-        Ir para Home
-      </Link>
+      
     </PageDefault>
   );
 }
